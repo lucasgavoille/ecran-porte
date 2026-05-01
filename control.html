@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Contrôle Porte</title>
+
+<style>
+body {
+  font-family: Arial;
+  text-align: center;
+}
+
+button {
+  padding: 15px;
+  margin: 10px;
+  font-size: 18px;
+}
+
+input {
+  padding: 10px;
+  font-size: 16px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎛️ Contrôle Porte</h1>
+
+<button onclick="open()">Entrée autorisée</button>
+<button onclick="close()">Séance en cours</button>
+
+<br><br>
+
+<input id="name" placeholder="Nom autorisé">
+<button onclick="add()">Ajouter</button>
+
+<p id="list"></p>
+
+<script>
+function open() {
+  localStorage.setItem("status", "open");
+}
+
+function close() {
+  localStorage.setItem("status", "closed");
+}
+
+function add() {
+  let names = localStorage.getItem("names") || "";
+  const input = document.getElementById("name").value;
+
+  if (input) {
+    names += (names ? ", " : "") + input;
+    localStorage.setItem("names", names);
+    document.getElementById("name").value = "";
+    update();
+  }
+}
+
+function update() {
+  document.getElementById("list").textContent =
+    "Autorisés : " + (localStorage.getItem("names") || "");
+}
+
+update();
+</script>
+
+</body>
+</html>
