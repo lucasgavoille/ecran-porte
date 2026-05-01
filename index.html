@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Porte Cinéma</title>
+
+<style>
+body {
+  background: black;
+  color: white;
+  text-align: center;
+  font-family: Arial;
+}
+
+h1 {
+  margin-top: 50px;
+}
+
+.status {
+  font-size: 40px;
+  margin-top: 30px;
+}
+
+.forbidden {
+  font-size: 120px;
+}
+
+.names {
+  margin-top: 30px;
+  font-size: 25px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎬 CINÉMA</h1>
+
+<div id="status" class="status">Entrée autorisée</div>
+<div id="icon" class="forbidden"></div>
+<div id="names" class="names"></div>
+
+<script>
+function update() {
+  const status = localStorage.getItem("status") || "open";
+  const names = localStorage.getItem("names") || "";
+
+  document.getElementById("status").textContent =
+    status === "closed" ? "Séance en cours" : "Entrée autorisée";
+
+  document.getElementById("icon").textContent =
+    status === "closed" ? "⛔" : "";
+
+  document.getElementById("names").textContent =
+    names ? "Autorisés : " + names : "";
+}
+
+setInterval(update, 1000);
+update();
+</script>
+
+</body>
+</html>
